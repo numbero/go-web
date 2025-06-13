@@ -8,25 +8,20 @@ import (
 	"gorm.io/gorm"
 )
 
-func AddUser(user model.User) {
-	db.DB.Save(&user)
-}
-
 func CreateUser(user model.User) {
 	db.DB.Save(&user)
 	log.Println("创建用户:", user)
 }
 
-func ReadUser(id int) {
+func ReadUser(name string) *model.User {
 	var user model.User
-
-	// 查询主键为 1 的用户
-	db.DB.First(&user, id)
-	log.Println("查询到用户:", user)
-
-	// 查询某个 email 的用户
-	db.DB.Where("email = ?", "alice@example.com").First(&user)
-	log.Println("通过 email 查询用户:", user)
+	result := db.DB.Where("name = ?", name).First(&user)
+	if result.Error != nil {
+		log.Println("未找到用户:", name)
+		return nil
+	}
+	log.Println("通过 name 查询用户:", user)
+	return &user
 }
 
 func UpdateUser(db *gorm.DB) {

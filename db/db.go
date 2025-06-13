@@ -6,7 +6,7 @@ import (
 
 	"example.com/go-web/config"
 	"example.com/go-web/model"
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
@@ -20,12 +20,18 @@ func InitDB() {
 	fmt.Println("DSN:", dsn)
 
 	var err error
-	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	// 连接mysql数据库
+	// DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	// 连接sqlite数据库
+	// DB, err = gorm.Open(sqlite.Open("file::memory:?cache=shared"), &gorm.Config{})
+	DB, err = gorm.Open(sqlite.Open("./tmp/test.db"), &gorm.Config{})
 	if err != nil {
 		log.Fatal("数据库连接失败:", err)
 	}
-
 	fmt.Println("✅ 数据库连接成功")
+
+	// 自动清理数据库表
+	// DB.DropTableIfExists(&User{})
 
 	// 自动迁移模型
 	err = DB.AutoMigrate(

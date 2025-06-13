@@ -53,7 +53,8 @@ func main() {
 		// v1.PUT("/:id", updateTodo)
 		// v1.DELETE("/:id", deleteTodo)
 
-		v1.POST("/user/add", controller.UserAdd)
+		v1.POST("/user", controller.CreateUser)
+		v1.GET("/user", controller.ReadUser)
 	}
 
 	// 3. 启动 HTTP 服务器
