@@ -33,6 +33,7 @@ func SetupRouter() *gin.Engine {
 
 		v1.POST("/user", handler.CreateUser)
 		v1.GET("/user", handler.ReadUser)
+		v1.GET("/user/:name", handler.ReadUserByName)
 	}
 	return router
 }

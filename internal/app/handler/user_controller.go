@@ -35,3 +35,19 @@ func ReadUser(c *gin.Context) {
 		"data":    user,
 	})
 }
+
+func ReadUserByName(c *gin.Context) {
+	name := c.Param("name")
+	if name == "" {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "name is required",
+		})
+		return
+	}
+	user := service.ReadUser(name)
+	log.Println("查询用户:", name)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "查询成功",
+		"data":    user,
+	})
+}
