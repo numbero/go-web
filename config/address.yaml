@@ -1,0 +1,20 @@
+version: v1.0.0
+
+country:
+  name: "China"
+  code: "CN"
+  provinces:
+    - name: "Guangdong"
+      code: "GD"
+      cities:
+        - name: "Guangzhou"
+          postal_code: "510000"
+        - name: "Shenzhen"
+          postal_code: "518000"
+    - name: "Zhejiang"
+      code: "ZJ"
+      cities:
+        - name: "Hangzhou"
+          postal_code: "310000"
+        - name: "Ningbo"
+          postal_code: "315000"

@@ -1,0 +1,15 @@
+version: v1.0.0
+
+users:
+  - name: "James"
+    age: 18
+  - name: "Mike"
+    age: 19
+  - name: "Lucy"
+    age: 20
+
+friends:
+  - name: Bob
+    age: 25
+  - name: Carol
+    age: 28

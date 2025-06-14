@@ -1,21 +1,26 @@
-package dao
+package repository
 
 import (
 	"log"
 
-	"example.com/go-web/db"
-	"example.com/go-web/model"
+	"go-web/internal/app/model"
+	"go-web/internal/database"
 	"gorm.io/gorm"
 )
 
 func CreateUser(user model.User) {
-	db.DB.Save(&user)
+	database.DB.Save(&user)
 	log.Println("创建用户:", user)
+}
+
+func CreateUsers(users []model.User) {
+	database.DB.Create(&users)
+	log.Println("创建用户列表")
 }
 
 func ReadUser(name string) *model.User {
 	var user model.User
-	result := db.DB.Where("name = ?", name).First(&user)
+	result := database.DB.Where("name = ?", name).First(&user)
 	if result.Error != nil {
 		log.Println("未找到用户:", name)
 		return nil
@@ -37,9 +42,9 @@ func UpdateUser(db *gorm.DB) {
 
 func DeleteUser(id int) {
 	var user model.User
-	db.DB.First(&user, id) // 找到 id=1 的用户
+	database.DB.First(&user, id) // 找到 id=1 的用户
 
 	// 删除用户
-	db.DB.Delete(&user)
+	database.DB.Delete(&user)
 	log.Println("用户已删除")
 }

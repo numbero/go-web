@@ -1,12 +1,12 @@
-package controller
+package handler
 
 import (
 	"log"
 	"net/http"
 	"strconv"
 
-	"example.com/go-web/service"
 	"github.com/gin-gonic/gin"
+	"go-web/internal/app/service"
 )
 
 func CreateUser(c *gin.Context) {

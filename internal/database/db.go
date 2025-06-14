@@ -1,11 +1,11 @@
-package db
+package database
 
 import (
 	"fmt"
 	"log"
 
-	"example.com/go-web/config"
-	"example.com/go-web/model"
+	"go-web/internal/app/model"
+	"go-web/internal/config"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
