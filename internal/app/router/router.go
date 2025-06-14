@@ -34,6 +34,32 @@ func SetupRouter() *gin.Engine {
 		v1.POST("/user", handler.CreateUser)
 		v1.GET("/user", handler.ReadUser)
 		v1.GET("/user/:name", handler.ReadUserByName)
+
+		v1.GET("/mcp", func(c *gin.Context) {
+			authHeader := c.GetHeader("Authorization")
+			userAgent := c.GetHeader("User-Agent")
+
+			c.JSON(200, gin.H{
+				"Authorization": authHeader,
+				"User-Agent":    userAgent,
+			})
+		})
+		v1.POST("/mcp", func(c *gin.Context) {
+			authHeader := c.GetHeader("Authorization")
+			userAgent := c.GetHeader("User-Agent")
+
+			var jsonData map[string]interface{}
+			if err := c.ShouldBindJSON(&jsonData); err != nil {
+				c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+				return
+			}
+
+			c.JSON(http.StatusOK, gin.H{
+				"Authorization": authHeader,
+				"User-Agent":    userAgent,
+				"body":          jsonData,
+			})
+		})
 	}
 	return router
 }
